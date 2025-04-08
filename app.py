@@ -9,7 +9,7 @@ def home():
 
 @app.route('/customer-groups')
 def get_customer_groups():
-    store_hash = "k6jflwesl8"
+    access_token = os.getenv("ACCESS_TOKEN")
     access_token = "25ouk455kn9lnxix6huouyb0zurhbm9"
 
     url = f"https://api.bigcommerce.com/stores/{store_hash}/v2/customer_groups"
