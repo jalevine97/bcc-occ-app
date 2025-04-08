@@ -3,7 +3,11 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/customer-groups', methods=['GET'])
+@app.route('/')
+def home():
+    return jsonify({"status": "running 🚀"})
+
+@app.route('/customer-groups')
 def get_customer_groups():
     store_hash = "k6jflwesl8"
     access_token = "25ouk455kn9lnxix6huouyb0zurhbm9"
@@ -15,15 +19,10 @@ def get_customer_groups():
         "Content-Type": "application/json"
     }
 
-    response = requests.get(url, headers=headers)
-    if response.status_code == 200:
-        return jsonify(response.json())
-    else:
+    try:
+        response = requests.get(url, headers=headers)
+        if response.status_code == 200:
+            return jsonify(response.json())
         return jsonify({"error": response.text}), response.status_code
-
-@app.route('/')
-def health_check():
-    return jsonify({"status": "ok"})
-
-if __name__ == '__main__':
-    app.run()
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
