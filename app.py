@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return jsonify({"status": "running 🚀"})
+    return jsonify({"status": "running"})
 
 @app.route('/customer-groups')
 def get_customer_groups():
